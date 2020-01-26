@@ -25,7 +25,7 @@ public class UserDao {
             result = preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
-            System.out.println("SQL problem");
+            JDBCUtils.printSQLException(e);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }

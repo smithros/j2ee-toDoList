@@ -26,7 +26,7 @@ public class LoginDao {
             status = rs.next();
 
         } catch (SQLException e) {
-            System.out.println("Sql problem");
+            JDBCUtils.printSQLException(e);
         }
         return status;
     }
