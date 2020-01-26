@@ -6,5 +6,5 @@ public class UserQuery {
             " (?, ?, ?, ?);";
 
     public static final String GET_USER_BY_NAME_PASSWORD =
-            "select * from users where user_name = ? and user_password = ?";
+            "SELECT * FROM users WHERE user_name = ? AND user_password = ?";
 }

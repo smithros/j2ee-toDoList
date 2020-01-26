@@ -6,6 +6,7 @@ import models.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserDao {
@@ -30,5 +31,26 @@ public class UserDao {
             e.printStackTrace();
         }
         return result;
+    }
+
+    public boolean validate(User user) throws ClassNotFoundException {
+        boolean status = false;
+
+        Class.forName("org.postgresql.Driver");
+
+        try (Connection connection = JDBCUtils.getConnection();
+             PreparedStatement preparedStatement = connection
+                     .prepareStatement(UserQuery.GET_USER_BY_NAME_PASSWORD)) {
+            preparedStatement.setString(1, user.getUsername());
+            preparedStatement.setString(2, user.getPassword());
+
+            System.out.println(preparedStatement);
+            ResultSet rs = preparedStatement.executeQuery();
+            status = rs.next();
+
+        } catch (SQLException e) {
+            JDBCUtils.printSQLException(e);
+        }
+        return status;
     }
 }
