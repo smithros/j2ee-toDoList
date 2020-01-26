@@ -2,6 +2,9 @@ package dao.queries;
 
 public class UserQuery {
     public static final String INSERT_USERS_SQL = "INSERT INTO users" +
-            "  (first_name, last_name, username, password) VALUES " +
+            "  (user_name, user_surname, user_login, user_password) VALUES " +
             " (?, ?, ?, ?);";
+
+    public static final String GET_USER_BY_NAME_PASSWORD =
+            "select * from users where user_name = ? and user_password = ?";
 }

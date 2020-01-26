@@ -17,7 +17,7 @@ public class UserController extends HttpServlet {
     private UserDao userDao;
 
     public void init() {
-        userDao = new UserDao();
+        this.userDao = new UserDao();
     }
 
     @Override
@@ -29,7 +29,8 @@ public class UserController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect("register/register.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("views/register.jsp");
+        requestDispatcher.forward(request, response);
     }
 
 
@@ -51,7 +52,7 @@ public class UserController extends HttpServlet {
             request.setAttribute("NOTIFICATION", "User Registered Successfully!");
         }
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("register/register.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("views/login.jsp");
         dispatcher.forward(request, response);
     }
 }
