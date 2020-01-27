@@ -1,6 +1,6 @@
-package controller;
+package controllers;
 
-import dao.ToDoImpl;
+import dao.impl.ToDoImpl;
 import models.ToDo;
 
 import javax.servlet.RequestDispatcher;

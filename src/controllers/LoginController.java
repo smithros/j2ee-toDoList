@@ -1,6 +1,6 @@
-package controller;
+package controllers;
 
-import dao.UserDao;
+import dao.impl.UserDaoImpl;
 import models.User;
 
 import java.io.IOException;
@@ -16,17 +16,20 @@ import javax.servlet.http.HttpSession;
 
 @WebServlet("/login")
 public class LoginController extends HttpServlet {
-    private UserDao userDao;
+    private UserDaoImpl userDao;
 
     public void init() {
-        this.userDao = new UserDao();
+        this.userDao = new UserDaoImpl();
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect("login.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("views/login.jsp");
+        requestDispatcher.forward(request, response);
     }
 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         authenticate(request, response);
@@ -35,21 +38,18 @@ public class LoginController extends HttpServlet {
     private void authenticate(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
 
-        try {
-            if (userDao.validate(user)) {
-                RequestDispatcher dispatcher = request.getRequestDispatcher("todo/todo-list.jsp");
-                dispatcher.forward(request, response);
-            } else {
-                HttpSession session = request.getSession();
-                session.setAttribute("user", username);
-                response.sendRedirect("login.jsp");
-            }
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+        if (userDao.validate(user)) {
+            RequestDispatcher dispatcher = request.getRequestDispatcher("views/todo-list.jsp");
+            dispatcher.forward(request, response);
+        } else {
+            HttpSession session = request.getSession();
+            session.setAttribute("user", username);
+            response.sendRedirect("login.jsp");
         }
     }
 }

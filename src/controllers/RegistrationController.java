@@ -1,6 +1,6 @@
-package controller;
+package controllers;
 
-import dao.UserDao;
+import dao.impl.UserDaoImpl;
 import models.User;
 
 import javax.servlet.RequestDispatcher;
@@ -12,12 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet("/register")
-public class UserController extends HttpServlet {
+public class RegistrationController extends HttpServlet {
 
-    private UserDao userDao;
+    private UserDaoImpl userDao;
 
     public void init() {
-        this.userDao = new UserDao();
+        this.userDao = new UserDaoImpl();
     }
 
     @Override
@@ -47,7 +47,7 @@ public class UserController extends HttpServlet {
         employee.setPassword(password);
 
 
-        int result = userDao.registerUser(employee);
+        int result = userDao.register(employee);
         if (result == 1) {
             request.setAttribute("NOTIFICATION", "User Registered Successfully!");
         }

@@ -1,8 +1,10 @@
 package config;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 public class JDBCUtils {
     private static final String jdbcURL = "jdbc:postgresql://localhost:5432/j2ee_library";
@@ -22,7 +24,7 @@ public class JDBCUtils {
         } catch (SQLException e) {
             printSQLException(e);
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("Driver problems in getConnectionMethod");
         }
         return connection;
     }
@@ -41,5 +43,13 @@ public class JDBCUtils {
                 }
             }
         }
+    }
+
+    public static Date getSQLDate(LocalDate date) {
+        return java.sql.Date.valueOf(date);
+    }
+
+    public static LocalDate getUtilDate(Date sqlDate) {
+        return sqlDate.toLocalDate();
     }
 }

@@ -1,6 +1,7 @@
-package dao;
+package dao.impl;
 
 import config.JDBCUtils;
+import dao.interfaces.ToDoDao;
 import dao.queries.ToDoQuery;
 import models.ToDo;
 
