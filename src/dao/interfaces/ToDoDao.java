@@ -13,7 +13,7 @@ public interface ToDoDao {
 
     void createToDo(ToDo todo) throws SQLException;
 
-    void updateTodo(ToDo todo) throws SQLException;
+    boolean updateTodo(ToDo todo) throws SQLException;
 
-    void deleteTodo(int todoId) throws SQLException;
+    boolean deleteTodo(int todoId) throws SQLException;
 }

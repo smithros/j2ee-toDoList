@@ -19,12 +19,12 @@ public class JDBCUtils {
             if (connection != null) {
                 System.out.println("Connected to the database!");
             } else {
-                System.out.println("Failed to make connection!");
+                System.err.println("Failed to make connection!");
             }
         } catch (SQLException e) {
             printSQLException(e);
         } catch (ClassNotFoundException e) {
-            System.out.println("Driver problems in getConnectionMethod");
+            System.err.println("Driver problems in getConnectionMethod");
         }
         return connection;
     }

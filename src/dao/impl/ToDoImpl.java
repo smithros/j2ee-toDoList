@@ -79,7 +79,8 @@ public class ToDoImpl implements ToDoDao {
     }
 
     @Override
-    public void updateTodo(ToDo todo) throws SQLException {
+    public boolean updateTodo(ToDo todo) throws SQLException {
+        boolean flag;
         try (Connection connection = JDBCUtils.getConnection();
              PreparedStatement statement = connection.prepareStatement(ToDoQuery.UPDATE_TODO)) {
             statement.setString(1, todo.getTitle());
@@ -89,16 +90,20 @@ public class ToDoImpl implements ToDoDao {
             statement.setBoolean(5, todo.getStatus());
             statement.setLong(6, todo.getId());
 
+            flag = statement.executeUpdate() > 0;
             System.out.println("update: " + statement);
-
         }
+        return flag;
     }
 
     @Override
-    public void deleteTodo(int id) throws SQLException {
+    public boolean deleteTodo(int id) throws SQLException {
+        boolean flag;
         try (Connection connection = JDBCUtils.getConnection();
              PreparedStatement statement = connection.prepareStatement(ToDoQuery.DELETE_TODO_BY_ID)) {
             statement.setInt(1, id);
+            flag = statement.executeUpdate() > 0;
         }
+        return flag;
     }
 }
