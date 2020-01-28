@@ -3,47 +3,42 @@ package models;
 import java.time.LocalDate;
 
 public class ToDo {
-    private int todoId;
-    private int userId;
+    private int id;
     private String title;
-    private String text;
-    private LocalDate aimDate;
+    private String username;
+    private String description;
+    private LocalDate targetDate;
     private boolean status;
 
-    public ToDo(int todoId, int userId, String title, String text, LocalDate aimDate, boolean status) {
-        this.todoId = todoId;
-        this.userId = userId;
+    protected ToDo() {
+
+    }
+
+    public ToDo(int id, String title, String username, String description, LocalDate targetDate, boolean isDone) {
+        super();
+        this.id = id;
         this.title = title;
-        this.text = text;
-        this.aimDate = aimDate;
-        this.status = status;
+        this.username = username;
+        this.description = description;
+        this.targetDate = targetDate;
+        this.status = isDone;
     }
 
-    public ToDo() {
-    }
-
-    public ToDo(int userId, String title, String text, LocalDate aimDate, boolean status) {
-        this.userId = userId;
+    public ToDo(String title, String username, String description, LocalDate targetDate, boolean isDone) {
+        super();
         this.title = title;
-        this.text = text;
-        this.aimDate = aimDate;
-        this.status = status;
+        this.username = username;
+        this.description = description;
+        this.targetDate = targetDate;
+        this.status = isDone;
     }
 
-    public int getTodoId() {
-        return todoId;
+    public int getId() {
+        return id;
     }
 
-    public void setTodoId(int todoId) {
-        this.todoId = todoId;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -54,20 +49,28 @@ public class ToDo {
         this.title = title;
     }
 
-    public String getText() {
-        return text;
+    public String getUsername() {
+        return username;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public LocalDate getAimDate() {
-        return aimDate;
+    public String getDescription() {
+        return description;
     }
 
-    public void setAimDate(LocalDate aimDate) {
-        this.aimDate = aimDate;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public LocalDate getTargetDate() {
+        return targetDate;
+    }
+
+    public void setTargetDate(LocalDate targetDate) {
+        this.targetDate = targetDate;
     }
 
     public boolean getStatus() {
@@ -81,11 +84,11 @@ public class ToDo {
     @Override
     public String toString() {
         return "ToDo{" +
-                "todoId=" + todoId +
-                ", userId=" + userId +
+                "id=" + id +
                 ", title='" + title + '\'' +
-                ", text='" + text + '\'' +
-                ", aimDate=" + aimDate +
+                ", username='" + username + '\'' +
+                ", description='" + description + '\'' +
+                ", targetDate=" + targetDate +
                 ", status=" + status +
                 '}';
     }
