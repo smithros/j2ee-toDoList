@@ -7,7 +7,7 @@
 
         <ul class="navbar-nav navbar-collapse justify-content-end">
             <li><a href="login" class="nav-link">Login</a></li>
-            <li><a href="register" class="nav-link">Signup</a></li>
+            <li><a href="register" class="nav-link">Sign Up</a></li>
         </ul>
     </nav>
 </header>
